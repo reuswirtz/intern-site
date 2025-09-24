@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>学生ログイン</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+  <h1>学生ログイン</h1>
+
+  <div>
+    <input id="email" type="email" placeholder="メールアドレス" required>
+    <input id="password" type="password" placeholder="パスワード" required>
+    <br><br>
+    <button onclick="signUp()">サインアップ</button>
+    <button onclick="signIn()">ログイン</button>
+    <button onclick="signOut()">ログアウト</button>
+  </div>
+
+  <script>
+    const { createClient } = supabase
+
+    // あなたのSupabaseプロジェクト情報
+    const supabaseUrl = "https://xsccgimenblpkkqhgtrx.supabase.co";
+    const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhzY2NnaW1lbmJscGtrcWhndHJ4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTg2OTI1MjcsImV4cCI6MjA3NDI2ODUyN30.lz1tSKzIMAW2qlJX8ZtYtP8hkHcXRsp4Mqd7THukP7k";
+
+    const supabaseClient = createClient(supabaseUrl, supabaseKey)
+
+    async function signUp() {
+      const { data, error } = await supabaseClient.auth.signUp({
+        email: document.getElementById("email").value,
+        password: document.getElementById("password").value,
+      })
+      if (error) {
+        alert("エラー: " + error.message)
+      } else {
+        alert("サインアップ成功！確認メールを送信しました。")
+      }
+    }
+
+    async function signIn() {
+      const { data, error } = await supabaseClient.auth.signInWithPassword({
+        email: document.getElementById("email").value,
+        password: document.getElementById("password").value,
+      })
+      if (error) {
+        alert("エラー: " + error.message)
+      } else {
+        alert("ログイン成功！")
+      }
+    }
+
+    async function signOut() {
+      const { error } = await supabaseClient.auth.signOut()
+      if (error) {
+        alert("ログアウト失敗: " + error.message)
+      } else {
+        alert("ログアウトしました。")
+      }
+    }
+  </script>
+</body>
+</html>
