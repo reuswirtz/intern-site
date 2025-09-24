@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>企業登録 | インターンポータル</title>
+  <script src="https://unpkg.com/@supabase/supabase-js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="container py-5">
+
+  <h1 class="mb-4">企業新規登録</h1>
+
+  <form id="register-form" class="mb-3">
+    <div class="mb-3">
+      <label for="email" class="form-label">メールアドレス</label>
+      <input type="email" id="email" class="form-control" required>
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">パスワード</label>
+      <input type="password" id="password" class="form-control" required>
+    </div>
+    <div class="mb-3">
+      <label for="company_name" class="form-label">会社名</label>
+      <input type="text" id="company_name" class="form-control" required>
+    </div>
+    <div class="mb-3">
+      <label for="website" class="form-label">会社サイトURL</label>
+      <input type="url" id="website" class="form-control">
+    </div>
+    <button type="submit" class="btn btn-primary">登録する</button>
+  </form>
+
+  <p>すでにアカウントをお持ちの方は <a href="company_login.html">こちらからログイン</a></p>
+
+  <script>
+    const supabaseUrl = "https://xsccgimenblpkkqhgtrx.supabase.co";
+    const supabaseKey = "YOUR_PUBLIC_ANON_KEY"; // あなたの anon key に置き換え
+    const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+    const form = document.getElementById("register-form");
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      const company_name = document.getElementById("company_name").value;
+      const website = document.getElementById("website").value;
+
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: { role: "company", company_name, website },
+          emailRedirectTo: window.location.origin + "/company_login.html"
+        }
+      });
+
+      if (error) {
+        alert("エラー: " + error.message);
+      } else {
+        alert("登録しました！確認メールを送信しました。メールを確認してください。");
+        window.location.href = "company_login.html";
+      }
+    });
+  </script>
+</body>
+</html>
