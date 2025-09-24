@@ -2,42 +2,107 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>企業ダッシュボード</title>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <title>企業マイページ | インターンポータル</title>
+  <script src="https://unpkg.com/@supabase/supabase-js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
-<body>
-  <h2>インターンシップ新規登録</h2>
-  <form onsubmit="submitInternship(event)">
-    <input type="text" id="title" placeholder="タイトル"><br>
-    <input type="text" id="location" placeholder="勤務地"><br>
-    <input type="text" id="duration" placeholder="期間"><br>
-    <textarea id="description" placeholder="仕事内容"></textarea><br>
-    <button type="submit">登録</button>
-  </form>
+<body class="container py-4">
+
+  <h1 class="mb-4">企業マイページ</h1>
+  <p id="welcome"></p>
+
+  <!-- 新規登録ボタン -->
+  <a href="company_create.html" class="btn btn-primary mb-4">新しいインターンを登録</a>
+
+  <!-- 登録済みインターン一覧 -->
+  <h2>登録済みインターン</h2>
+  <table class="table table-bordered" id="intern-table">
+    <thead>
+      <tr>
+        <th>タイトル</th>
+        <th>勤務地</th>
+        <th>期間</th>
+        <th>仕事内容</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <button id="logout" class="btn btn-secondary">ログアウト</button>
 
   <script>
-    const supabase = supabase.createClient(
-      "https://xsccgimenblpkkqhgtrx.supabase.co",
-      "YOUR_PUBLIC_KEY"
-    );
+    const supabaseUrl = "https://xsccgimenblpkkqhgtrx.supabase.co"; // ← あなたのURL
+    const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."; // ← anon key
+    const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
-    async function submitInternship(event) {
-      event.preventDefault();
-      const title = document.getElementById("title").value;
-      const location = document.getElementById("location").value;
-      const duration = document.getElementById("duration").value;
-      const description = document.getElementById("description").value;
+    // ログイン確認
+    supabase.auth.getUser().then(({ data: { user } }) => {
+      if (!user) {
+        window.location.href = "company_login.html";
+      } else {
+        document.getElementById("welcome").innerText = `ようこそ、${user.email} 様`;
+        loadInterns(user.id);
+      }
+    });
 
+    // インターン一覧をロード
+    async function loadInterns(company_id) {
       const { data, error } = await supabase
-        .from("internships")  // ← Supabaseに作るテーブル名
-        .insert([{ title, location, duration, description }]);
+        .from("internships")
+        .select("*")
+        .eq("company_id", company_id);
 
       if (error) {
-        alert("エラー: " + error.message);
+        console.error(error);
+        return;
+      }
+
+      const tbody = document.querySelector("#intern-table tbody");
+      tbody.innerHTML = "";
+
+      data.forEach((intern) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${intern.title}</td>
+          <td>${intern.location}</td>
+          <td>${intern.duration}</td>
+          <td>${intern.description}</td>
+          <td>
+            <button class="btn btn-sm btn-warning" onclick="editIntern(${intern.id})">編集</button>
+            <button class="btn btn-sm btn-danger" onclick="deleteIntern(${intern.id})">削除</button>
+          </td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+
+    // 編集
+    function editIntern(id) {
+      window.location.href = `company_edit.html?id=${id}`;
+    }
+
+    // 削除
+    async function deleteIntern(id) {
+      if (!confirm("本当に削除しますか？")) return;
+      const { error } = await supabase
+        .from("internships")
+        .delete()
+        .eq("id", id);
+
+      if (error) {
+        alert("削除に失敗しました");
       } else {
-        alert("登録完了！");
+        alert("削除しました");
+        location.reload();
       }
     }
+
+    // ログアウト
+    document.getElementById("logout").addEventListener("click", async () => {
+      await supabase.auth.signOut();
+      window.location.href = "company_login.html";
+    });
   </script>
 </body>
 </html>
