@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>企業ダッシュボード</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+</head>
+<body>
+  <h2>インターンシップ新規登録</h2>
+  <form onsubmit="submitInternship(event)">
+    <input type="text" id="title" placeholder="タイトル"><br>
+    <input type="text" id="location" placeholder="勤務地"><br>
+    <input type="text" id="duration" placeholder="期間"><br>
+    <textarea id="description" placeholder="仕事内容"></textarea><br>
+    <button type="submit">登録</button>
+  </form>
+
+  <script>
+    const supabase = supabase.createClient(
+      "https://xsccgimenblpkkqhgtrx.supabase.co",
+      "YOUR_PUBLIC_KEY"
+    );
+
+    async function submitInternship(event) {
+      event.preventDefault();
+      const title = document.getElementById("title").value;
+      const location = document.getElementById("location").value;
+      const duration = document.getElementById("duration").value;
+      const description = document.getElementById("description").value;
+
+      const { data, error } = await supabase
+        .from("internships")  // ← Supabaseに作るテーブル名
+        .insert([{ title, location, duration, description }]);
+
+      if (error) {
+        alert("エラー: " + error.message);
+      } else {
+        alert("登録完了！");
+      }
+    }
+  </script>
+</body>
+</html>

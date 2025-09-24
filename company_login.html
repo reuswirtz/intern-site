@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>企業ログイン - インターンポータル</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+</head>
+<body>
+  <h2>企業ログイン</h2>
+  <input type="email" id="email" placeholder="メールアドレス">
+  <input type="password" id="password" placeholder="パスワード">
+  <button onclick="signIn()">ログイン</button>
+  <button onclick="signUp()">新規登録</button>
+
+  <script>
+    const supabase = supabase.createClient(
+      "https://xsccgimenblpkkqhgtrx.supabase.co",
+      "YOUR_PUBLIC_KEY"
+    );
+
+    async function signUp() {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      const { user, error } = await supabase.auth.signUp({
+        email, password
+      }, {
+        data: { role: "company" } // ← ここで企業ユーザーを区別
+      });
+
+      if (error) {
+        alert("エラー: " + error.message);
+      } else {
+        alert("登録完了。メールを確認してください。");
+      }
+    }
+
+    async function signIn() {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      const { user, error } = await supabase.auth.signInWithPassword({
+        email, password
+      });
+
+      if (error) {
+        alert("ログイン失敗: " + error.message);
+      } else {
+        window.location.href = "company_dashboard.html";
+      }
+    }
+  </script>
+</body>
+</html>
