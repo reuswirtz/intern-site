@@ -2,32 +2,48 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>学生ログイン</title>
+  <title>インターンポータル｜学生ログイン</title>
+  <meta name="description" content="インターンポータルの学生ログインページ。アカウント登録・ログインはこちらから。">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
-<body>
-  <h1>学生ログイン</h1>
+<body class="bg-light">
 
-  <div>
-    <input id="email" type="email" placeholder="メールアドレス" required>
-    <input id="password" type="password" placeholder="パスワード" required>
-    <br><br>
-    <button onclick="signUp()">サインアップ</button>
-    <button onclick="signIn()">ログイン</button>
-    <button onclick="signOut()">ログアウト</button>
+  <div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="card p-4 shadow" style="width: 400px;">
+      <h2 class="text-center mb-3">インターンポータル 学生ログイン</h2>
+      <p class="text-center text-muted">ログインまたは新規登録してください</p>
+
+      <div class="mb-3">
+        <input id="email" type="email" class="form-control" placeholder="メールアドレス" required>
+      </div>
+      <div class="mb-3">
+        <input id="password" type="password" class="form-control" placeholder="パスワード" required>
+      </div>
+
+      <div class="d-grid gap-2">
+        <button class="btn btn-primary" onclick="signUp()">新規登録（サインアップ）</button>
+        <button class="btn btn-success" onclick="signIn()">ログイン</button>
+        <button class="btn btn-outline-secondary" onclick="signOut()">ログアウト</button>
+      </div>
+    </div>
   </div>
+
+  <!-- フッター -->
+  <footer class="bg-dark text-white text-center py-3">
+    <div class="container">
+      <p class="mb-1">&copy; 2025 インターンポータル運営. All Rights Reserved.</p>
+      <a href="index.html" class="text-white text-decoration-underline">トップページへ戻る</a>
+    </div>
+  </footer>
 
   <script>
     const { createClient } = supabase
-
-    // あなたのSupabaseプロジェクト情報
     const supabaseUrl = "https://xsccgimenblpkkqhgtrx.supabase.co";
-    const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhzY2NnaW1lbmJscGtrcWhndHJ4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTg2OTI1MjcsImV4cCI6MjA3NDI2ODUyN30.lz1tSKzIMAW2qlJX8ZtYtP8hkHcXRsp4Mqd7THukP7k";
-
+    const supabaseKey = "あなたの anon public key をここに"; // セキュリティのため公開用キーのみ
     const supabaseClient = createClient(supabaseUrl, supabaseKey)
 
     async function signUp() {
-      const { data, error } = await supabaseClient.auth.signUp({
+      const { error } = await supabaseClient.auth.signUp({
         email: document.getElementById("email").value,
         password: document.getElementById("password").value,
       })
@@ -39,7 +55,7 @@
     }
 
     async function signIn() {
-      const { data, error } = await supabaseClient.auth.signInWithPassword({
+      const { error } = await supabaseClient.auth.signInWithPassword({
         email: document.getElementById("email").value,
         password: document.getElementById("password").value,
       })
@@ -47,6 +63,7 @@
         alert("エラー: " + error.message)
       } else {
         alert("ログイン成功！")
+        window.location.href = "index.html";
       }
     }
 
