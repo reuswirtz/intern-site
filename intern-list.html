@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>インターン一覧｜インターンポータル</title>
+  <meta name="description" content="全国のインターンを期間・職種・エリアでサクッと検索。長期・短期・1dayまで、厳選情報をカード型で見やすく。">
+  <link rel="preload" href="images/main.jpg" as="image">
+  <link rel="stylesheet" href="css/list.css" />
+  <link rel="icon" href="images/logo.png">
+</head>
+<body>
+  <!-- ===== ナビバー ===== -->
+  <header class="nav">
+    <a class="brand" href="index.html">
+      <img src="images/logo.png" alt="インターンポータル ロゴ" />
+      <span>インターンポータル</span>
+    </a>
+    <button class="nav-toggle" aria-label="メニューを開く">☰</button>
+    <nav class="nav-links">
+      <a href="intern-list.html" class="active">インターン一覧</a>
+      <a href="blog/index.html">就活ノウハウ</a>
+      <a href="company_login.html">企業ログイン</a>
+      <a href="company_create.html" class="pill">企業登録（無料）</a>
+      <a href="login.html" class="outline">学生ログイン</a>
+    </nav>
+  </header>
+
+  <!-- ===== ヒーロー ===== -->
+  <section class="hero" role="img" aria-label="スーツ姿の学生ヘッダー写真">
+    <div class="hero-inner">
+      <h1>インターンを探す</h1>
+      <p>未来のキャリアを、ここから。</p>
+
+      <!-- ===== 検索フォーム ===== -->
+      <form class="search" action="#" method="get">
+        <label class="sr-only" for="q">キーワード</label>
+        <input id="q" name="q" type="search" placeholder="キーワード（例：マーケティング、エンジニア）">
+
+        <label class="sr-only" for="term">期間</label>
+        <select id="term" name="term">
+          <option value="">期間</option>
+          <option>1day</option>
+          <option>短期（〜3ヶ月）</option>
+          <option>長期（3ヶ月〜）</option>
+        </select>
+
+        <label class="sr-only" for="role">職種</label>
+        <select id="role" name="role">
+          <option value="">職種</option>
+          <option>エンジニア</option>
+          <option>マーケティング</option>
+          <option>営業</option>
+          <option>企画</option>
+          <option>デザイン</option>
+        </select>
+
+        <label class="sr-only" for="area">エリア</label>
+        <select id="area" name="area">
+          <option value="">エリア</option>
+          <option>オンライン</option>
+          <option>東京</option>
+          <option>大阪</option>
+          <option>名古屋</option>
+          <option>福岡</option>
+        </select>
+
+        <button type="submit">検索</button>
+      </form>
+
+      <div class="hero-cta">
+        <a href="company_create.html" class="cta">企業の方はこちら（無料掲載）</a>
+        <a href="login.html" class="ghost">学生ログイン</a>
+      </div>
+    </div>
+    <img class="hero-bg" src="images/students.jpg" alt="" />
+  </section>
+
+  <!-- ===== 一覧（カード） ===== -->
+  <main class="wrap">
+    <h2 class="section-title">注目のインターン</h2>
+
+    <div class="cards">
+      <!-- カード 1 -->
+      <article class="card">
+        <div class="thumb" style="--bg:url('images/sample-card.jpg')"></div>
+        <div class="body">
+          <h3>マーケティング長期インターン</h3>
+          <p class="company">株式会社グリーンワークス</p>
+          <ul class="meta">
+            <li>📅 長期（3ヶ月〜）</li>
+            <li>💰 時給1,200円〜</li>
+            <li>📍 東京</li>
+          </ul>
+          <div class="actions">
+            <a class="btn" href="detail1.html">詳細を見る</a>
+            <button class="icon" aria-label="保存">☆</button>
+            <button class="icon" aria-label="シェア">🔗</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- カード 2 -->
+      <article class="card">
+        <div class="thumb"></div>
+        <div class="body">
+          <h3>エンジニア短期インターン</h3>
+          <p class="company">テックブリッジ株式会社</p>
+          <ul class="meta">
+            <li>📅 短期（1ヶ月）</li>
+            <li>💰 交通費支給</li>
+            <li>📍 大阪</li>
+          </ul>
+          <div class="actions">
+            <a class="btn" href="detail1.html">詳細を見る</a>
+            <button class="icon" aria-label="保存">☆</button>
+            <button class="icon" aria-label="シェア">🔗</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- カード 3 -->
+      <article class="card">
+        <div class="thumb"></div>
+        <div class="body">
+          <h3>営業インターン（近日公開）</h3>
+          <p class="company">セールスパーク株式会社</p>
+          <ul class="meta">
+            <li>📅 3ヶ月</li>
+            <li>💰 成果連動</li>
+            <li>📍 名古屋</li>
+          </ul>
+          <div class="actions">
+            <a class="btn ghost" href="#">近日公開</a>
+            <button class="icon" aria-label="保存">☆</button>
+            <button class="icon" aria-label="シェア">🔗</button>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <div class="more">
+      <a href="#" class="btn big">もっと見る</a>
+    </div>
+  </main>
+
+  <!-- ===== フッター ===== -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <p class="brand"><img src="images/logo.png" alt=""> インターンポータル</p>
+      <nav class="footer-links">
+        <a href="index.html">トップ</a>
+        <a href="blog/index.html">就活ノウハウ</a>
+        <a href="#">利用規約</a>
+        <a href="#">プライバシー</a>
+      </nav>
+      <p class="copy">© 2025 インターンポータル運営. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // スマホ用 ナビ開閉
+    document.querySelector('.nav-toggle').addEventListener('click', () => {
+      document.querySelector('.nav').classList.toggle('open');
+    });
+  </script>
+</body>
+</html>
