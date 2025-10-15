@@ -1,121 +1,104 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>インターンポータル</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>インターンポータル｜長期・短期・有給インターン情報まとめ</title>
+  <meta name="description" content="全国のインターンを期間・職種・エリアで検索。即掲載×セルフサーブで学生・企業どちらも使いやすい日本最大級のインターンポータル。">
+  <link rel="stylesheet" href="css/list.css" />
+  <link rel="icon" href="images/logo.png">
 </head>
 <body>
 
-<!-- ナビバー -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="index.html">
-      <img src="images/logo_trimmed.png" alt="インターンポータル" height="40" style="vertical-align: middle;">
+  <!-- ナビバー -->
+  <header class="nav">
+    <a class="brand" href="index.html">
+      <img src="images/logo.png" alt="インターンポータル ロゴ" />
+      <span>インターンポータル</span>
     </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" href="#ranking">注目ランキング</a></li>
-        <li class="nav-item"><a class="nav-link" href="blog/index.html">就活ノウハウ＆インターン情報</a></li>
-        <li class="nav-item"><a class="nav-link" href="login.html">学生ログイン</a></li>
-      </ul>
+    <button class="nav-toggle" aria-label="メニューを開く">☰</button>
+    <nav class="nav-links">
+      <a href="intern-list.html">インターン一覧</a>
+      <a href="blog/index.html">就活ノウハウ</a>
+      <a href="company_login.html">企業ログイン</a>
+      <a href="company_register.html" class="pill">企業登録（無料）</a>
+      <a href="login.html" class="outline">学生ログイン</a>
+    </nav>
+  </header>
+
+  <!-- ヒーロー -->
+  <section class="hero">
+    <div class="hero-inner">
+      <h1>インターン探しを、もっとシンプルに。</h1>
+      <p>有給・長期・短期・1dayまで。就活の第一歩をサポート。</p>
+
+      <form class="search" action="intern-list.html" method="get">
+        <input type="search" name="q" placeholder="キーワード（例：営業、エンジニア、東京）">
+        <select name="term">
+          <option value="">期間</option>
+          <option>1day</option>
+          <option>短期</option>
+          <option>長期</option>
+        </select>
+        <select name="role">
+          <option value="">職種</option>
+          <option>エンジニア</option>
+          <option>マーケティング</option>
+          <option>営業</option>
+        </select>
+        <select name="area">
+          <option value="">エリア</option>
+          <option>オンライン</option>
+          <option>東京</option>
+          <option>大阪</option>
+          <option>福岡</option>
+        </select>
+        <button type="submit">検索</button>
+      </form>
     </div>
-  </div>
-</nav>
+    <img class="hero-bg" src="images/main.jpg" alt="">
+  </section>
 
-<!-- ヘッダー -->
-<header class="bg-dark text-white text-center py-5" style="background: url('images/students.jpg') center/cover;">
-  <div class="container">
-    <h1 class="display-4 fw-bold">インターンポータル</h1>
-    <p class="lead">未来のキャリアをここから始めよう。全国の最新インターン情報をまとめてチェック！</p>
-    <a href="login.html" class="btn btn-success btn-lg">学生ログイン</a>
-  </div>
-</header>
+  <!-- 注目インターン -->
+  <main class="wrap">
+    <h2 class="section-title">注目のインターン</h2>
 
-<!-- ランキング -->
-<section id="ranking" class="container my-5">
-  <h2 class="mb-4">注目インターンシップランキング</h2>
-  <div class="row">
-    <div class="col-md-4">
-      <div class="card shadow-sm border-0" style="background:#fff8e1;">
-        <div class="card-header bg-warning text-dark fw-bold">1位</div>
-        <div class="card-body">
-          <h5 class="card-title">株式会社○○ マーケティング長期インターン</h5>
-          <p class="card-text">勤務地: 東京<br>期間: 6ヶ月</p>
-          <a href="detail1.html" class="btn btn-primary">詳細を見る</a>
+    <div class="cards">
+      <article class="card">
+        <div class="thumb" style="--bg:url('images/sample-card.jpg')"></div>
+        <div class="body">
+          <h3>マーケティング長期インターン</h3>
+          <p class="company">株式会社グリーンワークス</p>
+          <ul class="meta">
+            <li>📅 長期（3ヶ月〜）</li>
+            <li>💰 時給1,200円〜</li>
+            <li>📍 東京</li>
+          </ul>
+          <a class="btn" href="detail1.html">詳細を見る</a>
         </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="card shadow-sm border-0" style="background:#f0f4ff;">
-        <div class="card-header bg-secondary text-white fw-bold">2位</div>
-        <div class="card-body">
-          <h5 class="card-title">○○株式会社 エンジニア短期インターン</h5>
-          <p class="card-text">勤務地: 大阪<br>期間: 1ヶ月</p>
-          <a href="#" class="btn btn-primary">詳細を見る</a>
+      </article>
+
+      <article class="card">
+        <div class="thumb"></div>
+        <div class="body">
+          <h3>エンジニア短期インターン</h3>
+          <p class="company">テックブリッジ株式会社</p>
+          <ul class="meta">
+            <li>📅 1ヶ月</li>
+            <li>💰 交通費支給</li>
+            <li>📍 大阪</li>
+          </ul>
+          <a class="btn" href="detail2.html">詳細を見る</a>
         </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="card shadow-sm border-0" style="background:#e3f2fd;">
-        <div class="card-header bg-info text-dark fw-bold">3位</div>
-        <div class="card-body">
-          <h5 class="card-title">株式会社□□ 営業インターン（近日公開）</h5>
-          <p class="card-text">勤務地: 名古屋<br>期間: 3ヶ月</p>
-          <a href="#" class="btn btn-outline-primary">近日公開</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+      </article>
 
-<!-- ブログ -->
-<section class="container my-5">
-  <h2 class="mb-4">就活ノウハウ＆インターン情報</h2>
-  <div class="row">
-    <div class="col-md-6">
-      <div class="card shadow-sm border-0">
-        <img src="images/blog1.jpg" class="card-img-top" alt="インターン探し">
-        <div class="card-body">
-          <h5 class="card-title">インターンシップの探し方</h5>
-          <p class="card-text">インターン探しのタイミングやおすすめ媒体を紹介します。</p>
-          <a href="blog/article1.html" class="btn btn-outline-primary">記事を読む</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="card shadow-sm border-0">
-        <img src="images/blog2.jpg" class="card-img-top" alt="自己分析">
-        <div class="card-body">
-          <h5 class="card-title">自己分析の始め方</h5>
-          <p class="card-text">就活に欠かせない自己分析のステップを解説します。</p>
-          <a href="blog/article2.html" class="btn btn-outline-primary">記事を読む</a>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="text-end mt-3">
-    <a href="blog/index.html" class="btn btn-secondary">すべての記事を見る</a>
-  </div>
-</section>
-
-<!-- フッター -->
-<footer class="text-center mt-5 py-3 bg-dark text-light">
-  <p>© 2025 インターンポータル運営. All Rights Reserved.</p>
-  <p>
-    <a href="index.html" class="text-light">トップページへ戻る</a> | 
-    <a href="company_login.html" class="text-light">企業ログイン</a> | 
-    <a href="company_register.html" class="text-light">企業登録</a>
-  </p>
-</footer>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-
-</html>
-
-
+      <article class="card">
+        <div class="thumb"></div>
+        <div class="body">
+          <h3>営業インターン（近日公開）</h3>
+          <p class="company">セールスパーク株式会社</p>
+          <ul class="meta">
+            <li>📅 3ヶ月</li>
+            <li>💰 成果連動</li>
+            <li>📍 名古屋</li>
+          </ul>
